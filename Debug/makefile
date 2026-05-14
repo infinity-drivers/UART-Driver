@@ -11,7 +11,6 @@ RM := rm -rf
 -include sources.mk
 -include Startup/subdir.mk
 -include Src/subdir.mk
--include Drivers/STM32_ILI9341_Driver/Src/subdir.mk
 -include Drivers/STM32F4xx_HAL_Driver/Src/subdir.mk
 -include objects.mk
 
@@ -35,34 +34,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := SPI_LCD_Driver
+BUILD_ARTIFACT_NAME := USART_Driver
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-SPI_LCD_Driver.elf \
+USART_Driver.elf \
 
 MAP_FILES += \
-SPI_LCD_Driver.map \
+USART_Driver.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-SPI_LCD_Driver.list \
+USART_Driver.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: SPI_LCD_Driver.elf secondary-outputs
+main-build: USART_Driver.elf secondary-outputs
 
 # Tool invocations
-SPI_LCD_Driver.elf SPI_LCD_Driver.map: $(OBJS) $(USER_OBJS) C:\STM32\External\ packages\SPI_LCD_Driver\STM32F411RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "SPI_LCD_Driver.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\STM32\External packages\SPI_LCD_Driver\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="SPI_LCD_Driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+USART_Driver.elf USART_Driver.map: $(OBJS) $(USER_OBJS) C:\STM32\External\ packages\USART_Driver\STM32F411RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "USART_Driver.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\STM32\External packages\USART_Driver\STM32F411RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="USART_Driver.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -71,14 +70,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-SPI_LCD_Driver.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "SPI_LCD_Driver.list"
+USART_Driver.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "USART_Driver.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) SPI_LCD_Driver.elf SPI_LCD_Driver.list SPI_LCD_Driver.map default.size.stdout
+	-$(RM) USART_Driver.elf USART_Driver.list USART_Driver.map default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)

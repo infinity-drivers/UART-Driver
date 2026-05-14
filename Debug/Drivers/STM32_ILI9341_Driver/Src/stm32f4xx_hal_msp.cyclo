@@ -1,3 +1,0 @@
-../Drivers/STM32_ILI9341_Driver/Src/stm32f4xx_hal_msp.c:49:6:HAL_MspInit	1
-../Drivers/STM32_ILI9341_Driver/Src/stm32f4xx_hal_msp.c:78:6:HAL_SPI_MspInit	2
-../Drivers/STM32_ILI9341_Driver/Src/stm32f4xx_hal_msp.c:109:6:HAL_SPI_MspDeInit	2
